@@ -1,55 +1,51 @@
+import { post } from '../services/authService';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/auth.context';
 
 const Login = () => {
-  return (
-    <div>
-      const [user, setUser] = useState({
+    const [user, setUser] = useState({
         email: "",
         password: "",
+    });
+    const navigate = useNavigate();
 
-    })
-    const navigate = useNavigate()
-
-    const { storeToken. authenticateUser } = useContext(AuthContext)
+    const { storeToken, authenticateUser } = useContext(AuthContext);
 
     const handleTextInput = (e) => {
-        setUser((prev) => ({...prev, [e.target.name]: e.target.value}))
-    }
+        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        
-        post('/auth/signup', user)
-        .then((response) => {
-            storeToken(response.data)
-            authenticateUser()
-            navigate('/')
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
+        e.preventDefault();
+
+        post('/auth/login', user)
+            .then((response) => {
+                storeToken(response.data.authToken);
+                authenticateUser();
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     return (
         <div>
-            <h1>Signup</h1>
-            <form action="">
-                <label >
-                    Username
-                    <input name="username" type="text" value={newUser.username} onChange={handleTextInput}/>
-                </label>
-                <label >
+            <h1>Login</h1>
+            <form action="" onSubmit={handleSubmit}>
+                <label>
                     Email
-                    <input name="email" type="email" value={newUser.email} onChange={handleTextInput}/>
+                    <input name="email" type="email" value={user.email} onChange={handleTextInput} />
                 </label>
-                <label >
+                <label>
                     Password
-                    <input name="password" type="password" value={newUser.password} onChange={handleTextInput}/>
+                    <input name="password" type="password" value={user.password} onChange={handleTextInput} />
                 </label>
-                <button type='submit' >Login</button>
+                <button type='submit'>Login</button>
             </form>
         </div>
     );
-    </div>
-  );
-}
+};
 
 export default Login;
