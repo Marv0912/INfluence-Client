@@ -7,7 +7,6 @@ import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Search from './pages/Search' // search based on niche, location and followers
-import Results from './pages/Results' // Results based on search
 import InfluencerDetails from './pages/InfluencerDetails' // As a company when clicking on searched result, you can see the influencer details
 import Database from './pages/Database' // If company has saved users, they will be displayed in a table here
 import Profile from './pages/Profile' // Logged In user details
@@ -35,10 +34,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/search' element={<Search />}></Route>
-        <Route path='/results' element={<Results />}></Route>
         <Route path='/influencer/:id' element={<InfluencerDetails />}></Route>
         <Route path='/database' element={<Database />}></Route>
-        <Route path='/user/:id' element={<Profile />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
         {/* Create Dropdown menu on */}
         {/* {isLoggedOut()} */}
       </Routes>
