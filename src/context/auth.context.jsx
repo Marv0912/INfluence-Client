@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
 
@@ -44,6 +45,7 @@ function AuthProvider({ children }) {
                     // Update state variables
                     setIsLoading(false);
                     setUser(user);
+                    navigate('/');
                 })
                 .catch((error) => {
                     // If the server sends an error response (invalid token)
