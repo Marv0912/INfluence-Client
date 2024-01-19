@@ -10,6 +10,7 @@ import Search from './pages/Search' // search based on niche, location and follo
 import InfluencerDetails from './pages/InfluencerDetails' // As a company when clicking on searched result, you can see the influencer details
 import Database from './pages/Database' // If company has saved users, they will be displayed in a table here
 import Profile from './pages/Profile' // Logged In user details
+import EditProfile from './pages/EditProfile'
 // TODO: Create an edit profile page || when clicking edit on Profile, change it to form type
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
         <Route path='/influencer/:id' element={<InfluencerDetails />}></Route>
         <Route path='/database' element={<Database />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/edit/profile/:id' element={<EditProfile />}></Route>
+
         {/* Create Dropdown menu on */}
         {/* {isLoggedOut()} */}
       </Routes>

@@ -114,26 +114,22 @@ const SearchInfluencers = () => {
                 {influencers.length === 0 ? (
                     <p className="text-gray-500">No influencers found. Start searching!</p>
                 ) : (
-                    <table className="w-full border-collapse border border-gray-300">
+                    <table className="min-w-full leading-normal">
                         <thead>
-                            <tr className="bg-blue-500 text-white">
-                                <th className="p-2">Name</th>
-                                <th className="p-2">Location</th>
-                                <th className="p-2">Category</th>
-                                <th className="p-2">Followers Count</th>
+                            <tr className="bg-gray-400 text-gray-600 text-sm leading-normal">
+                                <th className="py-3 px-6 text-left">Name</th>
+                                <th className="py-3 px-6 text-left">Location</th>
+                                <th className="py-3 px-6 text-left">Category</th>
+                                <th className="py-3 px-6 text-left">Followers Count</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-gray-700 text-sm font-light">
                             {influencers.map((influencer) => (
-                                <tr
-                                    key={influencer._id}
-                                    className="hover:bg-gray-100 cursor-pointer"
-                                    onClick={() => navigateToInfluencerDetails(influencer._id)}
-                                >
-                                    <td className="p-2">{influencer.user.name}</td>
-                                    <td className="p-2">{influencer.location}</td>
-                                    <td className="p-2">{influencer.category}</td>
-                                    <td className="p-2">{influencer.followersCount}</td>
+                                <tr key={influencer._id} className="border-b border-gray-200 hover:bg-gray-100 cursor-pointer" onClick={() => navigateToInfluencerDetails(influencer._id)}>
+                                    <td className="py-3 px-6 text-left whitespace-nowrap">{influencer.user.name}</td>
+                                    <td className="py-3 px-6 text-left whitespace-nowrap">{influencer.location}</td>
+                                    <td className="py-3 px-6 text-left whitespace-nowrap">{influencer.category}</td>
+                                    <td className="py-3 px-6 text-left whitespace-nowrap">{influencer.followersCount}</td>
                                 </tr>
                             ))}
                         </tbody>

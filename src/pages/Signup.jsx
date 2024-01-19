@@ -6,16 +6,18 @@ import { useNavigate } from 'react-router-dom'
 const Signup = () => {
     const [newUser, setNewUser] = useState({
         username: "",
-        name:"",
+        name: "",
         email: "",
         password: "",
-        role: "influencer",
+        role: "Influencer",
         location: "",
         companyName: "",
         industry: "",
-        contactEmail: "",
-        contactPhone: "",
-        contactAddress: "",
+        contactInformation: {
+            contactEmail: "",
+            contactPhone: "",
+            contactAddress: ""
+        },
         bio: "",
         website: "",
         instagramUrl: "",
@@ -26,22 +28,37 @@ const Signup = () => {
 
     const { storeToken, authenticateUser } = useContext(AuthContext)
 
+    // Check if the field belongs to contactInformation
     const handleTextInput = (e) => {
-        setNewUser((prev) => ({...prev, [e.target.name]: e.target.value}))
-    }
+        const { name, value } = e.target;
+        if (["contactEmail", "contactPhone", "contactAddress"].includes(name)) {
+            setNewUser(prev => ({
+                ...prev,
+                contactInformation: {
+                    ...prev.contactInformation,
+                    [name]: value
+                }
+            }));
+        } else {
+            setNewUser(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("Sending newUser to the backend:", newUser);
         post('/auth/signup', newUser)
-        .then((response) => {
-            storeToken(response.data.authToken)
-            authenticateUser()
-            navigate('/')
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then((response) => {
+                storeToken(response.data.authToken)
+                authenticateUser()
+                navigate('/')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -111,12 +128,12 @@ const Signup = () => {
                             onChange={handleTextInput}
                             className="w-full border rounded px-3 py-2"
                         >
-                            <option value="influencer">Influencer</option>
-                            <option value="company">Company</option>
+                            <option value="Influencer">Influencer</option>
+                            <option value="Company">Company</option>
                         </select>
                     </div>
                     {/* Fields for Company Model */}
-                    {newUser.role === "company" && (
+                    {newUser.role === "Company" && (
                         <div>
                             <label className="block mb-1">Company Name:</label>
                             <input
@@ -138,7 +155,7 @@ const Signup = () => {
                             <input
                                 name="contactEmail"
                                 type="email"
-                                value={newUser.contactEmail}
+                                value={newUser.contactInformation.contactEmail}
                                 onChange={handleTextInput}
                                 className="w-full border rounded px-3 py-2"
                             />
@@ -146,7 +163,7 @@ const Signup = () => {
                             <input
                                 name="contactPhone"
                                 type="text"
-                                value={newUser.contactPhone}
+                                value={newUser.contactInformation.contactPhone}
                                 onChange={handleTextInput}
                                 className="w-full border rounded px-3 py-2"
                             />
@@ -154,14 +171,14 @@ const Signup = () => {
                             <input
                                 name="contactAddress"
                                 type="text"
-                                value={newUser.contactAddress}
+                                value={newUser.contactInformation.contactAddress}
                                 onChange={handleTextInput}
                                 className="w-full border rounded px-3 py-2"
                             />
                         </div>
                     )}
                     {/* Fields for Influencer Model */}
-                    {newUser.role === "influencer" && (
+                    {newUser.role === "Influencer" && (
                         <div>
                             <label className="block mb-1">Bio:</label>
                             <textarea
