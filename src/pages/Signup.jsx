@@ -5,24 +5,24 @@ import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
     const [newUser, setNewUser] = useState({
-        username: "",
-        name: "",
-        email: "",
-        password: "",
-        role: "Influencer",
-        location: "",
-        companyName: "",
-        industry: "",
+        username: "", // User-Specific
+        name: "", // User-Specific
+        email: "", // User-Specific
+        password: "", // User-Specific
+        role: "Influencer", // User-Specific
+        location: "", //Company- specific
+        companyName: "", //Company- specific
+        industry: "", //Company- specific
         contactInformation: {
-            contactEmail: "",
-            contactPhone: "",
-            contactAddress: ""
+            contactEmail: "", //Company- specific
+            contactPhone: "", //Company- specific
+            contactAddress: "" //Company- specific
         },
-        bio: "",
-        website: "",
-        instagramUrl: "",
-        category: "",
-        followersCount: ""
+        bio: "", // Influencer-specific
+        website: "", // Influencer-specific
+        instagramUrl: "", // Influencer-specific
+        category: "", // Influencer-specific
+        followersCount: "" // Influencer-specific
     });
     const navigate = useNavigate();
 
